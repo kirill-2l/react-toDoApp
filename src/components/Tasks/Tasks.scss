@@ -1,0 +1,83 @@
+.tasks {
+  &__title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #64c3ed;
+    line-height: 39px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f2f2f2;
+    &:hover {
+      img {
+        opacity: 0.2;
+      }
+    }
+  }
+
+  img {
+    opacity: 0;
+    cursor: pointer;
+    margin-left: 15px;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &__items {
+    margin-top: 30px;
+    &-row {
+      display: flex;
+      align-items: center;
+
+      input {
+        margin-left: 15px;
+        border: none;
+        width: 100%;
+      }
+    }
+
+  }
+
+
+  .checkbox {
+
+    &:hover {
+      label {
+        background-color: #f2f2f2;
+        border-color: #f2f2f2;
+        svg {
+          opacity: 1;
+          path {
+            stroke: #b2b2b2;
+          }
+        }
+      }
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #e8e8e8;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      transition: background-color linear .3s;
+      svg {
+        position: relative;
+        stroke: #fff;
+      }
+    }
+    input {
+      display: none;
+    }
+    input:checked + label {
+      background-color: #4dd599;
+      border-color: #4dd599;
+      svg {
+        path {
+          stroke: #fff;
+        }
+      }
+    }
+  }
+}
