@@ -1,29 +1,66 @@
-import React from 'react';
+import React from "react";
+import axios from "axios";
 
-import editSvg from '../../assets/img/edit.svg';
+import editSvg from "../../assets/img/edit.svg";
 
-import './Tasks.scss';
+import AddTasksForm from './AddTasksForm';
 
-const Tasks = () => {
+import "./Tasks.scss";
+
+const Tasks = ({ list, onEditTitle,  onAddTask}) => {
+  const editTitle = () => {
+    const newTitle = window.prompt("Название списка", list.name);
+    if (newTitle) {
+      onEditTitle(list.id, newTitle);
+      axios
+        .patch("http://localhost:3001/lists/" + list.id, {
+          name: newTitle
+        })
+        .catch(() => {
+          alert("Не удалось обновить название");
+        });
+    }
+  };
+
   return (
     <div className="tasks">
-      <h2 className="tasks__title">Фронтенд <img src={editSvg} alt="edit item" /></h2>
+      <h2 className="tasks__title">
+        {list.name}
+        <img onClick={editTitle} src={editSvg} alt="edit item" />
+      </h2>
       <div className="tasks__items">
-        <div className="tasks__items-row">
-        <div className="checkbox">
-          <input id="check" type="checkbox" />
-          <label htmlFor="check">
-            <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-
-          </label>
-        </div>
-          <input value="Далеко-далеко за словесными горами в стране."/>
-        </div>
+        {!list.tasks.length && <h2>Задачи отсутствуют</h2>}
+        {list.tasks.map(task => {
+          return (
+            <div key={task.id} className="tasks__items-row">
+              <div className="checkbox">
+                <input id={`check-${task.id}`} type="checkbox" />
+                <label htmlFor={`check-${task.id}`}>
+                  <svg
+                    width="11"
+                    height="8"
+                    viewBox="0 0 11 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </label>
+              </div>
+              <input value={task.text} readOnly />
+            </div>
+          );
+        })}
+      <AddTasksForm list={list} onAddTask={onAddTask}/>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Tasks;
