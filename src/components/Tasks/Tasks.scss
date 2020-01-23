@@ -1,4 +1,10 @@
 .tasks {
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+  a {
+    text-decoration: none;
+  }
   &__title {
     font-size: 32px;
     font-weight: bold;
@@ -21,11 +27,10 @@
     }
   }
 
-
   &__form {
     margin-top: 20px;
 
-    &-block{
+    &-block {
       .button {
         margin-right: 10px;
         margin-top: 15px;
@@ -37,7 +42,7 @@
       align-items: center;
       cursor: pointer;
       opacity: 0.4;
-      transition: opacity linear .3s;
+      transition: opacity linear 0.3s;
       &:hover {
         opacity: 0.8;
       }
@@ -54,8 +59,6 @@
     }
   }
 
-
-
   &__items {
     margin-top: 30px;
     &-row {
@@ -63,7 +66,41 @@
       align-items: center;
       margin-bottom: 15px;
 
-      input {
+      &:hover &-actions {
+        opacity: 1;
+      }
+
+      &-actions {
+        display: flex;
+        opacity: 0;
+        transition: opacity 0.15s linear;
+
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          background-color: lighten(#f4f6f8, 2%);
+          border-radius: 6px;
+          margin-left: 5px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: darken(#f4f6f8, 2%);
+            svg {
+              opacity: 0.9;
+            }
+          }
+          svg {
+            width: 11px;
+            height: 11px;
+            opacity: 0.4;
+          }
+        }
+      }
+
+      p {
         margin-left: 15px;
         border: none;
         width: 100%;
@@ -78,12 +115,9 @@
       top: 50%;
       left: 50%;
     }
-
   }
 
-
   .checkbox {
-
     &:hover {
       label {
         background-color: #f2f2f2;
@@ -106,7 +140,7 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
-      transition: background-color linear .3s;
+      transition: background-color linear 0.3s;
       svg {
         position: relative;
         stroke: #fff;

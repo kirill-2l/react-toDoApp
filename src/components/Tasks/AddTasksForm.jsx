@@ -5,8 +5,9 @@ import addSvg from "../../assets/img/add.svg";
 const AddTasksForm = ({ list, onAddTask }) => {
   const [visibleForm, setVisibleForm] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(null);
 
-  const toggleVisibleForm = () => {
+  const toggleFormVisible = () => {
     setVisibleForm(!visibleForm);
     setInputValue("");
   };
@@ -17,16 +18,25 @@ const AddTasksForm = ({ list, onAddTask }) => {
       text: inputValue,
       completed: false
     };
-    axios.post("http://localhost:3001/tasks ", obj).then(({ data }) => {
-      onAddTask(list.id, obj);
-      toggleVisibleForm();
-    });
+    setIsLoading(true);
+    axios
+      .post("http://localhost:3001/tasks ", obj)
+      .then(({ data }) => {
+        onAddTask(list.id, obj);
+        toggleFormVisible();
+      })
+      .catch(() => {
+        alert("ошибка при добавлении задачи");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <div className="tasks__form">
       {!visibleForm ? (
-        <div onClick={toggleVisibleForm} className="tasks__form-new">
+        <div onClick={toggleFormVisible} className="tasks__form-new">
           <img src={addSvg} alt="add task" />
           <span onClick={() => setVisibleForm(!visibleForm)}>Новая задача</span>
         </div>
@@ -40,10 +50,10 @@ const AddTasksForm = ({ list, onAddTask }) => {
               placeholder="Текст задачи"
               onChange={e => setInputValue(e.target.value)}
             />
-            <button onClick={addTask} className="button">
-              Добавить задача
+            <button disabled={isLoading} onClick={addTask} className="button">
+              {isLoading ? "Добавление..." : "Добавить задача"}
             </button>
-            <button onClick={toggleVisibleForm} className="button button--gray">
+            <button onClick={toggleFormVisible} className="button button--gray">
               Отмена
             </button>
           </div>

@@ -57,12 +57,6 @@
       "completed": false
     },
     {
-      "listId": 2,
-      "text": "123",
-      "completed": true,
-      "id": 5
-    },
-    {
       "listId": 1,
       "text": "test",
       "completed": false,
@@ -77,13 +71,13 @@
     {
       "listId": 1,
       "text": "qweqwe",
-      "completed": true,
+      "completed": false,
       "id": 8
     },
     {
       "listId": 1,
       "text": "123",
-      "completed": false,
+      "completed": true,
       "id": 9
     },
     {
@@ -93,16 +87,34 @@
       "id": 10
     },
     {
-      "listId": 2,
-      "text": "222",
+      "listId": 1,
+      "text": "123123123",
       "completed": true,
-      "id": 12
+      "id": 14
     },
     {
-      "listId": 2,
-      "text": "123213213",
+      "listId": 1,
+      "text": "234234234",
+      "completed": true,
+      "id": 15
+    },
+    {
+      "listId": 1,
+      "text": "123123123",
       "completed": false,
-      "id": 13
+      "id": 17
+    },
+    {
+      "listId": 1,
+      "text": "123123123",
+      "completed": false,
+      "id": 18
+    },
+    {
+      "listId": 1,
+      "text": "6sfgsdga",
+      "completed": false,
+      "id": 19
     }
   ],
   "colors": [
